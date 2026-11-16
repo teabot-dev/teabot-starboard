@@ -1,0 +1,244 @@
+{
+  "commands": {
+    "description": "starboard commands",
+    "name": "starboard",
+    "options": [
+      {
+        "description": "Keep a channel's messages off every board. A category keeps every channel in it off.",
+        "name": "ignore",
+        "options": [
+          {
+            "description": "The channel or category.",
+            "name": "channel",
+            "required": true,
+            "type": 7
+          }
+        ],
+        "type": 1
+      },
+      {
+        "description": "The server's boards.",
+        "name": "list",
+        "options": [],
+        "type": 1
+      },
+      {
+        "description": "Remove a board. Its reposts stay in its channel.",
+        "name": "remove",
+        "options": [
+          {
+            "description": "The board's emoji.",
+            "max_length": 64,
+            "name": "emoji",
+            "required": true,
+            "type": 3
+          }
+        ],
+        "type": 1
+      },
+      {
+        "description": "Make a board, or change the one for this emoji.",
+        "name": "set",
+        "options": [
+          {
+            "description": "The reaction it counts, such as \u2b50 or one of this server's emoji.",
+            "max_length": 64,
+            "name": "emoji",
+            "required": true,
+            "type": 3
+          },
+          {
+            "description": "Where messages are reposted.",
+            "name": "channel",
+            "required": true,
+            "type": 7
+          },
+          {
+            "description": "How many reactions a message needs.",
+            "max_value": 1000,
+            "min_value": 1,
+            "name": "threshold",
+            "required": false,
+            "type": 4
+          },
+          {
+            "description": "Whether the author's own reaction counts.",
+            "name": "self_stars",
+            "required": false,
+            "type": 5
+          }
+        ],
+        "type": 1
+      },
+      {
+        "description": "A board's most reacted messages.",
+        "name": "top",
+        "options": [
+          {
+            "description": "The board's emoji.",
+            "max_length": 64,
+            "name": "emoji",
+            "required": true,
+            "type": 3
+          }
+        ],
+        "type": 1
+      },
+      {
+        "description": "Let boards take a channel's messages again.",
+        "name": "unignore",
+        "options": [
+          {
+            "description": "The channel or category.",
+            "name": "channel",
+            "required": true,
+            "type": 7
+          }
+        ],
+        "type": 1
+      }
+    ],
+    "type": 1
+  },
+  "events": [
+    "reaction_add",
+    "reaction_remove"
+  ],
+  "jobs": {
+    "refresh": {
+      "properties": {
+        "board": {
+          "title": "Board",
+          "type": "integer"
+        },
+        "channel": {
+          "title": "Channel",
+          "type": "integer"
+        },
+        "emoji": {
+          "title": "Emoji",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "board",
+        "channel",
+        "message",
+        "emoji"
+      ],
+      "title": "StarboardRefreshInput",
+      "type": "object"
+    }
+  },
+  "tools": {
+    "starboard_ignore": {
+      "properties": {
+        "channel": {
+          "description": "The channel or category.",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "title": "Channel",
+          "type": "string"
+        }
+      },
+      "required": [
+        "channel"
+      ],
+      "title": "StarboardIgnoreInput",
+      "type": "object"
+    },
+    "starboard_list": {
+      "properties": {},
+      "title": "StarboardListInput",
+      "type": "object"
+    },
+    "starboard_remove": {
+      "properties": {
+        "confirm": {
+          "description": "The confirm value of a plan this tool returned. Leave it out to get a plan.",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "The board's emoji.",
+          "maxLength": 64,
+          "title": "Emoji",
+          "type": "string"
+        }
+      },
+      "required": [
+        "emoji"
+      ],
+      "title": "StarboardRemoveInput",
+      "type": "object"
+    },
+    "starboard_set": {
+      "properties": {
+        "channel": {
+          "description": "Where messages are reposted.",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "title": "Channel",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "The reaction it counts, such as \u2b50 or one of this server's emoji.",
+          "maxLength": 64,
+          "title": "Emoji",
+          "type": "string"
+        },
+        "self_stars": {
+          "default": false,
+          "description": "Whether the author's own reaction counts.",
+          "title": "Self Stars",
+          "type": "boolean"
+        },
+        "threshold": {
+          "default": 3,
+          "description": "How many reactions a message needs.",
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Threshold",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "emoji",
+        "channel"
+      ],
+      "title": "StarboardSetInput",
+      "type": "object"
+    },
+    "starboard_top": {
+      "properties": {
+        "emoji": {
+          "description": "The board's emoji.",
+          "maxLength": 64,
+          "title": "Emoji",
+          "type": "string"
+        }
+      },
+      "required": [
+        "emoji"
+      ],
+      "title": "StarboardTopInput",
+      "type": "object"
+    },
+    "starboard_unignore": {
+      "properties": {
+        "channel": {
+          "description": "The channel or category.",
+          "pattern": "^[1-9][0-9]{0,19}$",
+          "title": "Channel",
+          "type": "string"
+        }
+      },
+      "required": [
+        "channel"
+      ],
+      "title": "StarboardUnignoreInput",
+      "type": "object"
+    }
+  }
+}
