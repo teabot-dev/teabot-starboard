@@ -36,7 +36,3 @@ line-length = 120
 
 [tool.pyright]
 typeCheckingMode = "strict"
-
-# teabot 1.7, which this plugin needs, is not on PyPI yet: until it is, take it from main.
-[tool.uv.sources]
-teabot = { git = "https://github.com/teabot-dev/teabot.git", branch = "main" }

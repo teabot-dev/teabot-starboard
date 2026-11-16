@@ -1655,8 +1655,8 @@ wheels = [
 
 [[package]]
 name = "teabot"
-version = "1.7.0.dev0"
-source = { git = "https://github.com/teabot-dev/teabot.git?branch=main#9f48d2046122ee27b85ed4ef501577474a223b7f" }
+version = "1.7.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asyncpg" },
     { name = "discord-py" },
@@ -1670,6 +1670,10 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "uvicorn" },
     { name = "watchfiles" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/11/cc/331e2eacb5f2ac4658042d84de04f877e04a90c5d1d6181dab420c15c1cc/teabot-1.7.0.tar.gz", hash = "sha256:be358d64bae68aec96c0adc485404a5e6546ab49ce5a3f57eb37ff74807ce0c4", size = 5202823, upload-time = "2026-11-16T17:08:26.656Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4f/8c/6d4a75290e921f5776ec02699014c50137a00acb1f54c557751d29dc7d66/teabot-1.7.0-py3-none-any.whl", hash = "sha256:0edb861efc36b3b9098e0c0976a82b1072ae8c9468754d10171fa158fa8f0926", size = 219185, upload-time = "2026-11-16T17:08:25.245Z" },
 ]
 
 [package.optional-dependencies]
@@ -1696,13 +1700,13 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "teabot", git = "https://github.com/teabot-dev/teabot.git?branch=main" }]
+requires-dist = [{ name = "teabot", specifier = ">=1.7,<2" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "pyright", specifier = ">=1.1.414" },
     { name = "ruff", specifier = ">=0.17" },
-    { name = "teabot", extras = ["testing"], git = "https://github.com/teabot-dev/teabot.git?branch=main" },
+    { name = "teabot", extras = ["testing"] },
 ]
 
 [[package]]
